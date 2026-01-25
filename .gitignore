@@ -1,0 +1,17 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore environment/config files
+.env
+
+# Ignore logs and cache
+*.log
+/cache/
+tmp/
+
+# Ignore vendor folder (if you use Composer later)
+vendor/
+
+# Ignore XAMPP config files (not needed in repo)
+.htaccess
