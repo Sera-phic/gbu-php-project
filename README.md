@@ -1,87 +1,92 @@
-# GBU Portal System – Event Management & Placement Cell
+# Semester Online Registration System
 
-This project is a full-stack PHP-based web system designed to support college operations by providing two integrated portals:
-1. **Event Management & Registration Portal**
-2. **Placement Cell Student Portal**
+A PHP/MySQL web application that digitizes the GBU university semester registration and payment process.
 
-The system is modular, scalable, and built with real-world deployment in mind. It allows students to interact with college services efficiently while enabling administrators to manage data securely and effectively.
+## Requirements
 
----
+- PHP 8.1+
+- MySQL 8.0+
+- Composer
+- Apache with `mod_rewrite` (or Nginx with equivalent `try_files` config)
+- SSL certificate (HTTPS required)
 
-## 📌 Project Objectives
+## Setup
 
-- Improve student engagement through centralized digital services.
-- Simplify event registration and placement management.
-- Provide a real-world deployable system that can be integrated into the college website.
-- Ensure equal learning and contribution for both team members.
+1. **Clone the repository**
+   ```bash
+   git clone <repo-url>
+   cd semester-online-registration
+   ```
 
----
+2. **Copy environment file and fill in values**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your database credentials, API keys, and app URL
+   ```
 
-## 🧱 Project Architecture
+3. **Install PHP dependencies**
+   ```bash
+   composer install --no-dev   # production
+   # or
+   composer install            # development (includes PHPUnit)
+   ```
 
-The project consists of a **common landing page** that directs users to two independent portals:
-# GBU Portal System — Event Management & Placement Cell
+4. **Run database migrations** (in order)
+   ```bash
+   mysql -u <user> -p <app_db_name> < database/migrations/001_create_students.sql
+   mysql -u <user> -p <app_db_name> < database/migrations/002_create_otp_tokens.sql
+   mysql -u <user> -p <app_db_name> < database/migrations/003_create_registrations.sql
+   mysql -u <user> -p <app_db_name> < database/migrations/004_create_payments.sql
+   mysql -u <user> -p <app_db_name> < database/migrations/005_create_admin_actions.sql
+   ```
 
-TL;DR: A lightweight PHP-based system providing two portals: Event Management and Placement Cell, suitable for local development with XAMPP or deployment to any PHP host.
+5. **Configure web server**
+   - Point the document root to the `public/` directory.
+   - Ensure `mod_rewrite` is enabled (Apache) or configure `try_files` (Nginx).
+   - Enable HTTPS — HTTP requests are automatically redirected.
 
-## Table of Contents
-- Features
-- Architecture
-- Tech Stack & Requirements
-- Installation (Local)
-- Configuration
-- Quickstart
-- Folder Structure
-- Contributing
-- Security Notes
-- License
+6. **Set up cron jobs**
+   ```cron
+   # Retry pending payment verifications every 6 hours
+   0 */6 * * * php /path/to/app/scripts/retry_verification.php
 
-## Features
-- Two portals: Event Management (students + admin) and Placement Cell (students + admin).
-- Student registration, event sign-ups, profile/resume upload, job listings, and admin dashboards.
+   # Purge expired OTP tokens hourly
+   0 * * * * php /path/to/app/scripts/purge_otp_tokens.php
+   ```
 
-## Architecture
-The app uses a shared landing page that routes to `/event/` and `/placement/`. Common services (DB connection and auth) are in `config/` and `auth/`.
+7. **Create the uploads directory** (outside web root)
+   ```bash
+   mkdir -p storage/uploads
+   chmod 750 storage/uploads
+   ```
 
-## Tech Stack & Requirements
-- PHP 7.4 or newer
-- MySQL 5.7+ (or MariaDB compatible)
-- Apache 2.4+ (XAMPP recommended for local dev)
-- PHP extensions: `mysqli`, `pdo_mysql`, `mbstring`, `fileinfo`, `openssl`
+## Running Tests
 
-## Installation (Local)
-1. Place the project folder in your web server root (for XAMPP: `C:\xampp\htdocs\gbu-php`).
-2. Start Apache and MySQL using the XAMPP control panel.
-3. Create a MySQL database for the app and import any provided `.sql` schema if available.
-4. Update database credentials in `config/database.php` (see Configuration).
+```bash
+./vendor/bin/phpunit --testdox
+```
 
-## Configuration
-Edit `config/database.php` and set the `host`, `username`, `password`, and `database` variables to match your MySQL server. Do not commit production credentials to version control; keep secrets out of the repository.
+## Directory Structure
 
-## Quickstart
-1. Start Apache and MySQL (XAMPP).
-2. Configure `config/database.php` with your DB credentials.
-3. Import the database schema if provided.
-4. Open your browser to `http://localhost/gbu-php/` to view the landing page.
-
-## Folder Structure (short)
-`gbu-php/`
-- `index.php` — main landing page
-- `assets/` — CSS, JS, images
-- `event/` — Event Management portal (student + admin)
-- `placement/` — Placement portal (student + admin)
-- `config/database.php` — DB connection
-- `auth/` — login, register, logout handlers
-
-## Contributing
-Please open issues for bugs or feature requests. To contribute, fork the repo, create a feature branch, and open a pull request. Keep PHP code readable and follow consistent indentation. Add steps here for tests or linters if you want them.
-
-## Security Notes
-- Sanitize user inputs and validate uploads before saving.
-- Use password hashing (password_hash) and HTTPS in production.
-- Restrict file upload types and sizes.
-
-## License
-This project is released under the MIT License. See [LICENSE](LICENSE) for details.
-- **Frontend:** HTML, CSS, JavaScript, Bootstrap
-
+```
+├── app/
+│   ├── Controllers/
+│   ├── Services/
+│   ├── Models/
+│   ├── Views/
+│   └── Middleware/
+├── config/
+│   ├── app.php
+│   └── database.php
+├── database/
+│   └── migrations/
+├── public/          ← web root
+│   ├── index.php
+│   └── .htaccess
+├── scripts/
+├── storage/
+│   └── uploads/     ← receipt files (outside web root)
+├── tests/
+├── .env.example
+└── composer.json
+```
