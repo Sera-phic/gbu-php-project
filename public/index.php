@@ -87,6 +87,12 @@ function renderView(string $view, array $data = []): void
 // -------------------------------------------------------------------------
 match (true) {
 
+    // Home - redirect to login
+    $uri === '/' && $method === 'GET' => (function () {
+        header('Location: /login', true, 302);
+        exit;
+    })(),
+
     // Sign-up
     $uri === '/signup' && $method === 'GET' => renderView('auth/signup'),
     $uri === '/signup' && $method === 'POST' => (function () use ($authController) {

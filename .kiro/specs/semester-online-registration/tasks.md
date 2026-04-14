@@ -25,19 +25,19 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Insert student record with `is_active = 1`; trigger `NotificationService::sendWelcomeSms()`
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7_
 
-  - [~] 2.2 Write property test for sign-up rejection of invalid College IDs
+  - [ ]* 2.2 Write property test for sign-up rejection of invalid College IDs
     - **Property 1: Invalid College ID always rejected at sign-up**
     - **Validates: Requirements 1.1**
 
-  - [~] 2.3 Write property test for duplicate College ID rejection
+  - [ ]* 2.3 Write property test for duplicate College ID rejection
     - **Property 2: Duplicate College ID always rejected at sign-up**
     - **Validates: Requirements 1.2**
 
-  - [~] 2.4 Write property test for invalid sign-up inputs
+  - [ ]* 2.4 Write property test for invalid sign-up inputs
     - **Property 3: Invalid sign-up inputs always rejected**
     - **Validates: Requirements 1.3, 1.4**
 
-  - [~] 2.5 Write property test for password storage
+  - [ ]* 2.5 Write property test for password storage
     - **Property 4: Passwords are never stored in plaintext**
     - **Validates: Requirements 1.6, 10.7**
 
@@ -46,7 +46,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Use `random_int()` to generate a 6-digit numeric string
     - _Requirements: 12.1, 12.2_
 
-  - [~] 3.2 Write property test for OTP format invariant
+  - [ ]* 3.2 Write property test for OTP format invariant
     - **Property 7: OTP format invariant**
     - **Validates: Requirements 2.5, 12.1**
 
@@ -57,15 +57,15 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Call `NotificationService::sendOtp()` to deliver OTP via SMS
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 10.6, 10.8, 12.3_
 
-  - [~] 3.4 Write property test for invalid login credentials rejection
+  - [ ]* 3.4 Write property test for invalid login credentials rejection
     - **Property 5: Invalid login credentials always rejected**
     - **Validates: Requirements 2.1, 2.2, 2.3**
 
-  - [~] 3.5 Write property test for OTP rate limiting
+  - [ ]* 3.5 Write property test for OTP rate limiting
     - **Property 6: OTP rate limiting enforced**
     - **Validates: Requirements 2.4, 10.6**
 
-  - [~] 3.6 Write property test for OTP plaintext storage
+  - [ ]* 3.6 Write property test for OTP plaintext storage
     - **Property 8: OTP is never stored in plaintext**
     - **Validates: Requirements 2.5, 12.3, 10.8**
 
@@ -76,11 +76,11 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Regenerate session ID on session creation; configure 30-minute inactivity timeout
     - _Requirements: 2.6, 2.7, 2.8, 2.9, 2.10, 10.4, 10.5_
 
-  - [~] 3.8 Write property test for expired OTP rejection
+  - [ ]* 3.8 Write property test for expired OTP rejection
     - **Property 9: Expired OTP always rejected**
     - **Validates: Requirements 2.6, 12.5**
 
-  - [~] 3.9 Write property test for OTP reuse prevention
+  - [ ]* 3.9 Write property test for OTP reuse prevention
     - **Property 10: Used OTP cannot be reused**
     - **Validates: Requirements 2.8, 12.4**
 
@@ -98,7 +98,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Validate CSRF token on every POST request; reject and abort if missing or mismatched
     - _Requirements: 10.2_
 
-  - [~] 5.3 Write property test for CSRF protection
+  - [ ]* 5.3 Write property test for CSRF protection
     - **Property 23: CSRF protection rejects requests without valid token**
     - **Validates: Requirements 10.2**
 
@@ -106,7 +106,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Create `Middleware/AdminMiddleware.php` that checks `session.role === 'admin'`; deny and redirect otherwise
     - _Requirements: 8.6, 10.10_
 
-  - [~] 5.5 Write property test for non-admin session access denial
+  - [ ]* 5.5 Write property test for non-admin session access denial
     - **Property 24: Non-admin sessions cannot access admin routes**
     - **Validates: Requirements 8.6, 10.10**
 
@@ -120,7 +120,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Fetch current registration and payment status for the active semester
     - _Requirements: 3.2_
 
-  - [~] 6.3 Write unit tests for StudentPortalController
+  - [ ]* 6.3 Write unit tests for StudentPortalController
     - Test dashboard data aggregation, cache hit/miss behavior, and status display
     - _Requirements: 3.1, 3.2, 3.4_
 
@@ -130,11 +130,11 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Return `eligible: bool` and `reason: string` without mutating any DB row
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-  - [~] 7.2 Write property test for eligibility check read-only invariant
+  - [ ]* 7.2 Write property test for eligibility check read-only invariant
     - **Property 11: Eligibility check is read-only (pure function)**
     - **Validates: Requirements 4.5**
 
-  - [~] 7.3 Write property test for ineligible student registration block
+  - [ ]* 7.3 Write property test for ineligible student registration block
     - **Property 12: Ineligible students cannot register**
     - **Validates: Requirements 4.1, 4.2, 4.3, 5.3**
 
@@ -144,11 +144,11 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Redirect student to payment step
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
-  - [~] 7.5 Write property test for registration initial state
+  - [ ]* 7.5 Write property test for registration initial state
     - **Property 13: Registration submission creates correct initial state**
     - **Validates: Requirements 5.1, 5.2**
 
-  - [~] 7.6 Write property test for subjects JSON round-trip
+  - [ ]* 7.6 Write property test for subjects JSON round-trip
     - **Property 14: Subjects JSON round-trip**
     - **Validates: Requirements 5.4**
 
@@ -173,11 +173,11 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Trigger `PaymentVerificationService::verify()`
     - _Requirements: 6.3, 6.4, 6.5, 6.6, 10.9_
 
-  - [~] 9.4 Write property test for payment submission status guard
+  - [ ]* 9.4 Write property test for payment submission status guard
     - **Property 15: Payment submission only allowed from pending_payment status**
     - **Validates: Requirements 6.5**
 
-  - [~] 9.5 Write unit tests for PaymentController
+  - [ ]* 9.5 Write unit tests for PaymentController
     - Test Razorpay redirect, callback recording, bank transfer validation, and file upload rejection for invalid MIME types
     - _Requirements: 6.1, 6.2, 6.3, 6.6_
 
@@ -188,7 +188,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - If not `captured`: return `verified: false` without modifying registration
     - _Requirements: 7.1, 7.2_
 
-  - [~] 10.2 Write property test for gateway payment verification determinism
+  - [ ]* 10.2 Write property test for gateway payment verification determinism
     - **Property 16: Gateway payment verification outcome is deterministic**
     - **Validates: Requirements 7.1, 7.2**
 
@@ -198,11 +198,11 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - If no match: set `verification_status = 'pending'`; handle Accounts_DB unavailability with error log and user-friendly message
     - _Requirements: 7.3, 7.4, 7.5, 7.7_
 
-  - [ ] 10.4 Write property test for bank transfer verification criteria
+  - [ ]* 10.4 Write property test for bank transfer verification criteria
     - **Property 17: Bank transfer verification matches on correct criteria**
     - **Validates: Requirements 7.3, 7.4**
 
-  - [ ] 10.5 Write property test for Accounts_DB immutability
+  - [ ]* 10.5 Write property test for Accounts_DB immutability
     - **Property 18: Accounts_DB is never mutated by verification**
     - **Validates: Requirements 7.7**
 
@@ -218,7 +218,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Return `false` and do not mutate the record on invalid transitions
     - _Requirements: 11.1, 11.2, 11.3_
 
-  - [ ] 11.2 Write property test for forward-only status transitions
+  - [ ]* 11.2 Write property test for forward-only status transitions
     - **Property 22: Registration status transitions are strictly forward**
     - **Validates: Requirements 11.1, 11.2**
 
@@ -230,7 +230,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Query Application_DB for all registrations with `status = 'payment_verified'` only
     - _Requirements: 8.1_
 
-  - [ ] 13.2 Write property test for admin dashboard filter
+  - [ ]* 13.2 Write property test for admin dashboard filter
     - **Property 19: Admin dashboard shows only payment_verified registrations**
     - **Validates: Requirements 8.1**
 
@@ -244,11 +244,11 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - On reject: call `updateRegistrationStatus('rejected')`, record reason in `admin_actions`, notify student
     - _Requirements: 8.3, 8.4, 8.5, 8.7, 11.4_
 
-  - [ ] 13.5 Write property test for admin approval/rejection status guard
+  - [ ]* 13.5 Write property test for admin approval/rejection status guard
     - **Property 20: Admin approval/rejection only allowed from payment_verified status**
     - **Validates: Requirements 8.5**
 
-  - [ ] 13.6 Write property test for admin action recording
+  - [ ]* 13.6 Write property test for admin action recording
     - **Property 21: Admin action is fully recorded**
     - **Validates: Requirements 8.3, 8.4, 8.7, 11.4**
 
@@ -258,7 +258,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Integrate PHPMailer for email notifications as a fallback channel
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-  - [ ] 14.2 Write unit tests for NotificationService
+  - [ ]* 14.2 Write unit tests for NotificationService
     - Mock SMS gateway and email transport; verify correct message content and recipient for each notification type
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
@@ -281,7 +281,7 @@ Implement a PHP/MySQL MVC web application that digitizes the university semester
     - Pending registrations list, registration detail view with approve/reject actions
     - _Requirements: 8.1, 8.2, 8.3, 8.4_
 
-  - [ ] 16.4 Write integration tests for the full student flow
+  - [ ]* 16.4 Write integration tests for the full student flow
     - Test sign-up → login → OTP → portal → eligibility → registration → payment → verification → approval end-to-end using a test database with fixture data
     - Mock Razorpay SDK and Accounts_DB with known fixture records
     - _Requirements: 1.5, 2.8, 4.4, 5.1, 6.2, 7.1, 8.3_

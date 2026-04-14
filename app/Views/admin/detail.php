@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Detail — Semester Online</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="container dashboard">
 <h1>Registration Detail</h1>
 
 <?php if (!empty($error)): ?>
-    <p style="color:red;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
-    <a href="/admin">Back to Dashboard</a>
+    <div class="alert alert-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
+    <p class="link-text"><a href="/admin">Back to Dashboard</a></p>
     <?php return; ?>
 <?php endif; ?>
 
@@ -54,22 +56,23 @@
 
 <h2>Actions</h2>
 
+<div class="action-buttons">
 <form method="POST" action="/admin/approve" style="display:inline;">
     <?= (new \App\Middleware\CsrfMiddleware())->inputField() ?>
     <input type="hidden" name="registration_id" value="<?= (int) ($registration['id'] ?? 0) ?>">
-    <button type="submit" onclick="return confirm('Approve this registration?')">✅ Approve</button>
+    <button type="submit" class="btn btn-approve" onclick="return confirm('Approve this registration?')">✅ Approve Registration</button>
 </form>
-
-&nbsp;
 
 <form method="POST" action="/admin/reject" style="display:inline;">
     <?= (new \App\Middleware\CsrfMiddleware())->inputField() ?>
     <input type="hidden" name="registration_id" value="<?= (int) ($registration['id'] ?? 0) ?>">
-    <label>Rejection Reason: <input type="text" name="reason" required maxlength="255"></label>
-    <button type="submit" onclick="return confirm('Reject this registration?')">❌ Reject</button>
+    <input type="text" name="reason" required maxlength="255" placeholder="Rejection reason" style="margin-right:8px;">
+    <button type="submit" class="btn btn-reject" onclick="return confirm('Reject this registration?')">❌ Reject Registration</button>
 </form>
+</div>
 
 <br><br>
-<a href="/admin">Back to Dashboard</a>
+<p class="link-text"><a href="/admin">Back to Dashboard</a></p>
+</div>
 </body>
 </html>

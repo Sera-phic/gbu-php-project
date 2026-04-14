@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Transfer — Semester Online</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="container">
 <h1>Bank Transfer Details</h1>
 
 <?php if (!empty($error)): ?>
-    <p style="color:red;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+    <div class="alert alert-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
 <?php endif; ?>
 
 <form method="POST" action="/payment/bank-transfer" enctype="multipart/form-data">
@@ -43,6 +45,7 @@
     <button type="submit">Submit</button>
 </form>
 
-<a href="/portal">Back to Portal</a>
+<p class="link-text"><a href="/portal">Back to Portal</a></p>
+</div>
 </body>
 </html>

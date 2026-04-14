@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment — Semester Online</title>
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
+<div class="container">
 <h1>Pay Semester Fees</h1>
 
 <?php if (!empty($error)): ?>
-    <p style="color:red;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+    <div class="alert alert-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
 <?php endif; ?>
 
 <?php if (!empty($_GET['payment'])): ?>
-    <p style="color:green;">Payment <?= htmlspecialchars($_GET['payment'], ENT_QUOTES, 'UTF-8') ?> successfully.</p>
+    <div class="alert alert-success">Payment <?= htmlspecialchars($_GET['payment'], ENT_QUOTES, 'UTF-8') ?> successfully.</div>
 <?php endif; ?>
 
 <p>Registration ID: <?= (int) ($registration_id ?? 0) ?></p>
@@ -68,6 +70,7 @@
 </details>
 
 <br>
-<a href="/portal">Back to Portal</a>
+<p class="link-text"><a href="/portal">Back to Portal</a></p>
+</div>
 </body>
 </html>

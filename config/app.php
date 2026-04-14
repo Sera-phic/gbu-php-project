@@ -25,13 +25,13 @@ if (file_exists($envFile)) {
     }
 }
 
-// Session hardening — must be set before session_start()
-ini_set('session.cookie_httponly', '1');
-ini_set('session.cookie_secure', '1');
-ini_set('session.use_strict_mode', '1');
-ini_set('session.gc_maxlifetime', '1800');  // 30 minutes
-ini_set('session.cookie_samesite', 'Strict');
-
 // Application constants
 define('APP_ENV', $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?: 'production');
 define('APP_URL', $_ENV['APP_URL'] ?? getenv('APP_URL') ?: '');
+
+// Session hardening — must be set before session_start()
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_secure', APP_ENV === 'production' ? '1' : '0');  // Disable in dev
+ini_set('session.use_strict_mode', '1');
+ini_set('session.gc_maxlifetime', '1800');  // 30 minutes
+ini_set('session.cookie_samesite', 'Strict');

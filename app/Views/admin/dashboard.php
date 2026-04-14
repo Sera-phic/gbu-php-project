@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard — Semester Online</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Admin Dashboard — Pending Registrations</h1>
+<div class="container dashboard">
+<h1>Admin Dashboard</h1>
+
+<div class="card">
+<h2>Pending Registrations</h2>
 
 <?php if (!empty($_GET['action'])): ?>
-    <p style="color:green;">Action: <?= htmlspecialchars($_GET['action'], ENT_QUOTES, 'UTF-8') ?> successfully.</p>
+    <div class="alert alert-success">Action: <?= htmlspecialchars($_GET['action'], ENT_QUOTES, 'UTF-8') ?> successfully.</div>
 <?php endif; ?>
 
 <?php if (empty($registrations)): ?>
-    <p>No registrations pending approval.</p>
+    <p class="text-muted">No registrations pending approval.</p>
 <?php else: ?>
     <table border="1" cellpadding="6">
         <thead>
@@ -50,8 +55,9 @@
         </tbody>
     </table>
 <?php endif; ?>
+</div>
 
-<br>
-<a href="/logout">Logout</a>
+<p class="link-text"><a href="/logout">Logout</a></p>
+</div>
 </body>
 </html>
