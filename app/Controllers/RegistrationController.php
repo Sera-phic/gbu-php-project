@@ -86,17 +86,16 @@ class RegistrationController
 
         $student = $this->fetchStudent($studentId);
 
-        // Fetch available subjects for this semester/program
+        // Fetch available subjects for this semester
         $stmt = $this->db->prepare(
             'SELECT code, name, credits
              FROM   subjects
-             WHERE  semester_id = :semester_id
-               AND  program     = :program
+             WHERE  semester = :semester
+               AND  is_active = 1
              ORDER  BY code ASC'
         );
         $stmt->execute([
-            ':semester_id' => $semesterId,
-            ':program'     => $student['program'] ?? '',
+            ':semester' => $semesterId,
         ]);
         $subjects = $stmt->fetchAll();
 

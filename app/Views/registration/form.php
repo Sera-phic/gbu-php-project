@@ -4,56 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semester Registration — Semester Online</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>Semester <?= (int) ($semester_id ?? 0) ?> Registration — <?= htmlspecialchars($academic_year ?? '', ENT_QUOTES, 'UTF-8') ?></h1>
+<div class="container">
+<h1>Semester <?= (int) ($semester_id ?? 0) ?> Registration</h1>
+<p style="text-align:center; color:#666; margin-bottom:20px;"><?= htmlspecialchars($academic_year ?? '', ENT_QUOTES, 'UTF-8') ?></p>
 
 <?php if (!empty($error)): ?>
-    <p style="color:red;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+    <div class="alert alert-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
 <?php endif; ?>
 
 <?php if (!empty($student)): ?>
-<p>Student: <?= htmlspecialchars($student['full_name'] ?? '', ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($student['college_id'] ?? '', ENT_QUOTES, 'UTF-8') ?>)</p>
+<p style="text-align:center; color:#666;">Student: <?= htmlspecialchars($student['full_name'] ?? '', ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($student['college_id'] ?? '', ENT_QUOTES, 'UTF-8') ?>)</p>
 <?php endif; ?>
 
 <form method="POST" action="/register">
     <?= (new \App\Middleware\CsrfMiddleware())->inputField() ?>
     <input type="hidden" name="semester_id" value="<?= (int) ($semester_id ?? 0) ?>">
 
-    <h3>Select Subjects</h3>
-    <?php if (!empty($subjects)): ?>
-        <?php foreach ($subjects as $subject): ?>
-            <label>
-                <input type="checkbox" name="subjects[]" value="<?= htmlspecialchars($subject['code'], ENT_QUOTES, 'UTF-8') ?>">
-                <?= htmlspecialchars($subject['code'] . ' — ' . $subject['name'], ENT_QUOTES, 'UTF-8') ?>
-                (<?= (int) $subject['credits'] ?> credits)
-            </label><br>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>No subjects available for this semester.</p>
-    <?php endif; ?>
+    <div>
+        <label>Select Subjects</label>
+        <?php if (!empty($subjects)): ?>
+            <?php foreach ($subjects as $subject): ?>
+                <label style="font-weight:normal; display:block; margin:8px 0;">
+                    <input type="checkbox" name="subjects[]" value="<?= htmlspecialchars($subject['code'], ENT_QUOTES, 'UTF-8') ?>">
+                    <?= htmlspecialchars($subject['code'] . ' — ' . $subject['name'], ENT_QUOTES, 'UTF-8') ?>
+                    (<?= (int) $subject['credits'] ?> credits)
+                </label>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p style="color:#999;">No subjects available for this semester.</p>
+        <?php endif; ?>
+    </div>
 
-    <br>
-    <label>
-        <input type="checkbox" name="hostel_required" value="1">
-        Hostel Required
-    </label><br><br>
+    <div>
+        <label style="font-weight:normal;">
+            <input type="checkbox" name="hostel_required" value="1">
+            Hostel Required
+        </label>
+    </div>
 
-    <label>Transport Option<br>
+    <div>
+        <label>Transport Option</label>
         <select name="transport">
             <option value="">— None —</option>
             <option value="bus">University Bus</option>
             <option value="own">Own Arrangement</option>
         </select>
-    </label><br><br>
+    </div>
 
-    <label>Remarks<br>
-        <textarea name="remarks" rows="3" cols="40" maxlength="500"></textarea>
-    </label><br><br>
+    <div>
+        <label>Remarks</label>
+        <textarea name="remarks" rows="3" maxlength="500"></textarea>
+    </div>
 
     <button type="submit">Submit Registration</button>
 </form>
 
-<p><a href="/portal">Back to Portal</a></p>
+<p class="link-text"><a href="/portal">Back to Portal</a></p>
+</div>
 </body>
 </html>

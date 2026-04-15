@@ -36,6 +36,14 @@ class NotificationService
      */
     public function sendOtp(string $mobile, string $otp): bool
     {
+        // In development mode, store OTP in session for display instead of sending SMS
+        if (defined('APP_ENV') && APP_ENV === 'development') {
+            $_SESSION['dev_otp'] = $otp;
+            $_SESSION['dev_otp_mobile'] = $mobile;
+            error_log("DEV MODE: OTP for {$mobile} is: {$otp}");
+            return true;
+        }
+
         $message = "Your Semester Online OTP is: {$otp}. Valid for 5 minutes. Do not share.";
         return $this->sendSms($mobile, $message);
     }
